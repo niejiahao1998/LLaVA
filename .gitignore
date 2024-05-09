@@ -33,3 +33,7 @@ ckpts*
 
 # Demo
 serve_images/
+
+# Other folders and files
+playground/
+1_test/
