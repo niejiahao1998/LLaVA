@@ -1,10 +1,11 @@
 #!/bin/bash
 
-deepspeed llava/train/train_mem.py \
+export NCCL_P2P_DISABLE=1
+deepspeed --include=localhost:0,1,4,7 llava/train/train_xformers.py \
     --deepspeed ./scripts/zero3.json \
     --model_name_or_path lmsys/vicuna-7b-v1.5 \
     --version v1 \
-    --data_path ./playground/data/textvqa_21k.json \
+    --data_path /home/jnie002/vlm/Relation_VG/llava_qa_json/3113_our_data_100.json \
     --image_folder ./playground/data \
     --vision_tower openai/clip-vit-large-patch14-336 \
     --pretrain_mm_mlp_adapter ./checkpoints/llava-v1.5-7b/mm_projector.bin \
@@ -15,11 +16,11 @@ deepspeed llava/train/train_mem.py \
     --image_aspect_ratio pad \
     --group_by_modality_length True \
     --bf16 True \
-    --output_dir ./checkpoints/1_llava-v1.5-7b-textvqa-finetune \
+    --output_dir ./checkpoints/1_llava-v1.5-7b-our_100-finetune \
     --num_train_epochs 1 \
-    --per_device_train_batch_size 16 \
+    --per_device_train_batch_size 4 \
     --per_device_eval_batch_size 4 \
-    --gradient_accumulation_steps 1 \
+    --gradient_accumulation_steps 4 \
     --evaluation_strategy "no" \
     --save_strategy "steps" \
     --save_steps 50000 \
@@ -34,4 +35,4 @@ deepspeed llava/train/train_mem.py \
     --gradient_checkpointing True \
     --dataloader_num_workers 4 \
     --lazy_preprocess True \
-    --report_to wandb
+    --report_to "none"

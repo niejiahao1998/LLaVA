@@ -37,6 +37,8 @@ from llava.mm_utils import tokenizer_image_token
 
 from PIL import Image
 
+from transformers import GenerationConfig
+
 
 local_rank = None
 
@@ -967,6 +969,8 @@ def train(attn_implementation=None):
         trainer.train(resume_from_checkpoint=True)
     else:
         trainer.train()
+    
+    trainer.model.generation_config = GenerationConfig(do_sample=True)
     trainer.save_state()
 
     model.config.use_cache = True
