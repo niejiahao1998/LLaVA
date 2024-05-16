@@ -349,9 +349,12 @@ After downloading all of them, organize the data as follows in `./playground/dat
 │   └── images
 ├── textvqa
 │   └── train_images
-└── vg
-    ├── VG_100K
-    └── VG_100K_2
+├── vg
+│   ├── VG_100K
+│   └── VG_100K_2
+└── Dall-E_generated
+    ├── spatial
+    └── action
 ```
 
 2. Start training!
