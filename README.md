@@ -352,9 +352,12 @@ After downloading all of them, organize the data as follows in `./playground/dat
 ├── vg
 │   ├── VG_100K
 │   └── VG_100K_2
-└── Dall-E_generated
-    ├── spatial
-    └── action
+├── Dall-E_generated
+├   ├── spatial
+├   └── action
+└── SPEC
+    ├── relative_spatial
+    └── relative_size
 ```
 
 2. Start training!
